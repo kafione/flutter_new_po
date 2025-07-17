@@ -5,6 +5,8 @@ class textfiled extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController numberContolar = TextEditingController();
+    TextEditingController passwordContolar = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Text('text Fild', style: TextStyle(color: Colors.white)),
@@ -16,6 +18,8 @@ class textfiled extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(30),
             child: TextField(
+              keyboardType: TextInputType.phone,
+              controller: numberContolar,
               decoration: InputDecoration(
                 hintText: 'inter mobile numbers',
 
@@ -38,11 +42,13 @@ class textfiled extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 30, right: 30),
             child: TextField(
+              obscureText: true,
+              controller: passwordContolar,
               decoration: InputDecoration(
                 hintText: 'inter Password',
                 labelText: 'Password',
-                prefixIcon: Icon(color: Colors.green, Icons.password_outlined),
-                suffixIcon: Icon(color: Colors.green, Icons.check),
+                prefixIcon: Icon(color: Colors.green, Icons.lock),
+                suffixIcon: Icon(color: Colors.green, Icons.remove_red_eye),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(50),
                 ),
@@ -65,7 +71,23 @@ class textfiled extends StatelessWidget {
                 foregroundColor: const Color.fromARGB(175, 245, 3, 3),
               ),
 
-              onPressed: () {},
+              onPressed: () {
+                if (numberContolar.text.isEmpty) {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text('inter phone number')));
+                } else if (numberContolar.text.length < 11) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('inter corect number')),
+                  );
+                } else {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(numberContolar.text)));
+                }
+                print(numberContolar.text);
+                print(passwordContolar.text);
+              },
               child: Text(
                 'Submit',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
