@@ -75,7 +75,7 @@ class textfiled extends StatelessWidget {
                 if (numberContolar.text.isEmpty) {
                   ScaffoldMessenger.of(
                     context,
-                  ).showSnackBar(SnackBar(content: Text('inter phone number')));
+                  ).showSnackBar(SnackBar(content: Text('Iner phone number')));
                 } else if (numberContolar.text.length < 11) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('inter corect number')),
@@ -85,13 +85,32 @@ class textfiled extends StatelessWidget {
                     context,
                   ).showSnackBar(SnackBar(content: Text(numberContolar.text)));
                 }
-                print(numberContolar.text);
-                print(passwordContolar.text);
+                if (passwordContolar.text.isEmpty) {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text('inter pssword')));
+                }
               },
               child: Text(
                 'Submit',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
+            ),
+          ),
+          SizedBox(height: 20),
+          SizedBox(
+            width: 200,
+            height: 30,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.black,
+              ),
+              onPressed: () {
+                numberContolar.clear();
+                passwordContolar.clear();
+              },
+              child: Text('Clear'),
             ),
           ),
         ],
